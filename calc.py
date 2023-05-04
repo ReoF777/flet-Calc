@@ -1,14 +1,21 @@
-import flet as ft 
+import flet as ft
 
 def main(page: ft.Page):
     page.title = "Calculator"
-    page.window_width = 300
-    page.window_height = 350
 
+    # window size setting
+    page.window_width = 300
+    page.window_min_width = 300
+    page.window_max_width = 300
+    page.window_height = 350
+    page.window_min_height = 350
+    
+    # operand
     operand = 0
     subOperand = 0
     ans = 0
-    result = ft.Text(value=f"{ans}",expand=4,height=50)
+
+    result = ft.Text(value=f"{ans}",expand=4,height=50,size=35)
 
     page.add(
         ft.Row(controls=[result]),
