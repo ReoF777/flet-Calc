@@ -1,5 +1,40 @@
 import flet as ft
+from flet import (
+    Column,
+    Container,
+    ElevatedButton,
+    Page,
+    Row,
+    Text,
+    UserControl,
+    border_radius,
+    colors,
+)
 
+class CalcApp(UserControl):
+    def build(self):
+        self.result = Text(value="0", size=30)
+
+        return Container(
+            content=Column(
+                controls=[
+                    Row(controls=[self.result]),
+                    Row(controls=[
+                        ElevatedButton(text="AC",expand=1,on_click=self.button_click,data="AC"),
+                        ElevatedButton(text="+/-",expand=1,on_click=self.button_click,data="+/-"),
+                        ElevatedButton(text="%",expand=1,on_click=self.button_click,data="%"),
+                        ElevatedButton(text="/",expand=1,on_click=self.button_click,data="/"),
+                    ]),
+                    Row(controls=[
+                        
+                    ])
+                ]
+            )
+        )
+    
+    def button_click(self, e):
+        pass
+    
 def main(page: ft.Page):
     page.title = "Calculator"
 
@@ -10,54 +45,8 @@ def main(page: ft.Page):
     page.window_height = 350
     page.window_min_height = 350
     
-    # operand
-    operand = 0
-    subOperand = 0
-    ans = 0
-
-    result = ft.Text(value=f"{ans}",expand=4,height=50,size=35)
-
-    page.add(
-        ft.Row(controls=[result]),
-        ft.Row(
-            controls=[
-                ft.ElevatedButton(text="AC",expand=1),
-                ft.ElevatedButton(text="+/-",expand=1),
-                ft.ElevatedButton(text="%",expand=1),
-                ft.ElevatedButton(text="/", expand=1),
-            ]
-        ),
-        ft.Row(
-            controls=[
-                ft.ElevatedButton(text="7",expand=1),
-                ft.ElevatedButton(text="8", expand=1),
-                ft.ElevatedButton(text="9",expand=1),
-                ft.ElevatedButton(text="*", expand=1),
-            ]
-        ),
-        ft.Row(
-            controls=[
-                ft.ElevatedButton(text="4", expand=1),
-                ft.ElevatedButton(text="5", expand=1),
-                ft.ElevatedButton(text="6", expand=1),
-                ft.ElevatedButton(text="-", expand=1),
-            ]
-        ),
-        ft.Row(
-            controls=[
-                ft.ElevatedButton(text="1",expand=1),
-                ft.ElevatedButton(text="2", expand=1),
-                ft.ElevatedButton(text="3",expand=1),
-                ft.ElevatedButton(text="+", expand=1),
-            ]
-        ),
-        ft.Row(
-            controls=[
-                ft.ElevatedButton(text="0",expand=2),
-                ft.ElevatedButton(text=".",expand=1),
-                ft.ElevatedButton(text="=", expand=1),
-            ]
-        ),
-    )
+    calc = CalcApp()
+    page.add(calc)
+    
 
 ft.app(target=main)
