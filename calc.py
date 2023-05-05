@@ -17,6 +17,7 @@ class CalcApp(UserControl):
         self.num = 0
         self.is_new = False
         self.operand_select = False
+        self.operand = ""
 
         return Container(
             width=300,
@@ -61,34 +62,62 @@ class CalcApp(UserControl):
         data = e.control.data
 
         if(str.isdigit(data)):
-            self.num=int(data)
+            self.input_num=int(data)
             self.operand_select = False
+            self.operand = "Nan"
 
             if(self.operand_select):
-                pass
+                if(self.operand == "+"):
+                    pass
+                
+            else:
+                self.num = self.num *10 + self.input_num
 
-            self.result.value = data
-            print(data)
+            self.result.value = self.num
+
         elif(data == "+"):
             self.operand_select = True
+            self.operand = "+"
+
         elif(data == "-"):
             self.operand_select = True
+            self.operand = "-"
+
         elif(data == "*"):
             self.operand_select = True
+            self.operand = "*"
+
         elif(data == "/"):
             self.operand_select = True
+            self.operand = "/"
+
         elif(data == "%"):
             self.operand_select = True
+            self.num = self.num / 100
+
         elif(data == "."):
             pass
+
         elif(data == "+/-"):
-            self.operand_select = True
+            self.num = self.num * -1
+
         elif(data == "="):
             self.operand_select = True
+            if(self.operand == "Plus"):
+                pass
+            elif(self.operand == "Minus"):
+                pass
+            elif(self.operand == "Divide"):
+                pass
+            else:
+                pass
+
         else:
             self.operand_select = False
             self.result.value = 0
+            self.operand = 0
 
+        self.result.value = self.num
         self.update()
 
 
